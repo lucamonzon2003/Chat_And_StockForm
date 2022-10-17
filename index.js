@@ -10,8 +10,8 @@ class Contenedor {
         try {
             await fs.promises.writeFile(`./${this.name}.txt`, "[]")
             console.log('container creado')
-        } catch (error) {
-            console.error(error)
+        } catch(error) {
+            console.log(error)
         }
     }
 
@@ -26,7 +26,7 @@ class Contenedor {
                 id: 1
             })
             parsedProductos.push(producto)
-            fs.writeFileSync(`./${this.name}.txt`, JSON.stringify(parsedProductos, null, 2))
+            await fs.writeFile(`./${this.name}.txt`, JSON.stringify(parsedProductos, null, 2))
             return 1
         }else{
             parsedProductos.forEach(i => {
@@ -48,7 +48,7 @@ class Contenedor {
 
     async getById(Number) {
         try {
-            const data = await fs.promises.readFile('./productos.txt', 'utf-8')
+            const data = await fs.promises.readFile(`./${this.name}.txt`, 'utf-8')
             let dataP = JSON.parse(data);
             let resultado = dataP.filter(producto => producto.id === Number)
             console.log(resultado);
@@ -61,7 +61,7 @@ class Contenedor {
 
     async getAll() {
         try {
-            const data = await fs.promises.readFile('./productos.txt', 'utf-8')
+            const data = await fs.promises.readFile(`./${this.name}.txt`, 'utf-8')
             let dataP = JSON.parse(data);
             console.log(dataP)
 
@@ -74,21 +74,21 @@ class Contenedor {
     async deleteById(Number){
         try {
             let newArray = []
-            const data = await fs.promises.readFile('./productos.txt', 'utf-8')
+            const data = await fs.promises.readFile(`./${this.name}.txt`, 'utf-8')
             let dataP = JSON.parse(data);
             let resultado = dataP.filter(producto => producto.id /= Number)
             newArray.push(resultado)
-            fs.promises.writeFile('./productos.txt',JSON.stringify(resultado))
+            fs.promises.writeFile(`./${this.name}.txt`,JSON.stringify(resultado))
 
         }catch(err) {
             console.log(err)
         }
     }
 
-    
+
     async deleteAll() {
         try {
-            fs.promises.writeFile('./productos.txt', '')
+            fs.promises.writeFile(`./${this.name}.txt`, '')
         }catch(err) {
             console.log(err)
         }
