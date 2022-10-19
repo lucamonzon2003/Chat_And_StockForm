@@ -8,7 +8,7 @@ class Contenedor {
     
     async create() {
         try {
-            await fs.promises.writeFile(`./${this.name}.txt`, "[]")
+            await fs.promises.writeFile(`./${this.name}.txt`, "{}")
             console.log('container creado')
         } catch(error) {
             console.log(error)
@@ -18,7 +18,7 @@ class Contenedor {
 
     async save(producto){
         try {
-        const productos = await fs.readFile(`./${this.name}.txt`, 'utf-8')
+        const productos = await fs.promises.readFile(`./${this.name}.txt`, 'utf-8')
         const parsedProductos = JSON.parse(productos)
         let idMax = 0
         if(parsedProductos.length == 0){
@@ -88,7 +88,7 @@ class Contenedor {
 
     async deleteAll() {
         try {
-            fs.promises.writeFile(`./${this.name}.txt`, '')
+            fs.promises.writeFile(`./${this.name}.txt`, '{}')
         }catch(err) {
             console.log(err)
         }
@@ -100,5 +100,6 @@ const contenedor1 = new Contenedor('productos')
 
 contenedor1.save({
     name: "Libro2",
-    price: 22.32
+    price: 22.32,
+    id: 1
 })

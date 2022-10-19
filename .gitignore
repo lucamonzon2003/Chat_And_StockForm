@@ -1,0 +1,6 @@
+.env
+node_modules
+sv
+server.js
+package-lock.json
+package.json
