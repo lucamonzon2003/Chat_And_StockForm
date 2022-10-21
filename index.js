@@ -96,10 +96,4 @@ class Contenedor {
 
 }
 
-const contenedor1 = new Contenedor('productos')
-
-contenedor1.save({
-    name: "Libro2",
-    price: 22.32,
-    id: 1
-})
+module.exports = Contenedor;
