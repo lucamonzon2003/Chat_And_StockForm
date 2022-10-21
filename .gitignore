@@ -1,6 +1,7 @@
 .env
 node_modules
 sv
-server.js
+index.js
 package-lock.json
 package.json
+productos.txt
