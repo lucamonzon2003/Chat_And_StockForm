@@ -1,7 +1,0 @@
-.env
-node_modules
-sv
-index.js
-package-lock.json
-package.json
-productos.txt
