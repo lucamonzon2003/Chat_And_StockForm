@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="route.js"></script>
+    <title>Document</title>
+</head>
+<body class="container">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/main.js"></script>
+    <form>
+        <div class="mb-3">
+          <label class="form-label"><b>Nombre:</b></label>
+          <input type="text" class="form-control" name="nombre" placeholder="Text">
+        </div>
+        <div class="mb-3">
+          <label class="form-label"><b>Precio:</b></label>
+          <input type="text" class="form-control" name="precio" placeholder="Num">
+        </div>
+        <div class="mb-3">
+            <label class="form-label"><b>Thumbnail:</b></label>
+            <input type="text" class="form-control" name="thumbnail" placeholder="Url">
+          </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <script>
+          
+        </script>
+      </form>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Nombre</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Thumbnail</th>
+          </tr>
+        </thead>
+        <tbody>
+            <% productos.forEach(i =>{ %>
+            <tr>
+            <th scope="row"> <%= i.nombre %> </th>
+            <td> <%= i.precio %> </td>
+            <td> <img src="<%= i.thumbnail %>" width="100" height="100"> </td>
+        </tr>
+            <% }); %>
+            <tr>
+                <th scope="row">Lapiz</th>
+                <td>10</td>
+                <td><img src="https://png.pngtree.com/png-vector/20191102/ourlarge/pngtree-pencil-logo-design-icon-vector-png-image_1942085.jpg" width="50" height="50"></td>
+              </tr>
+        </tbody>
+      </table>
+    
+</body>
+</html>
