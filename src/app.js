@@ -1,6 +1,6 @@
 const express = require('express');
 
-const errorMiddleware = require('./middlewares/errorMiddlewar.js');
+const errorMiddleware = require('./middlewares/errorMiddleware.js');
 
 const { Server: HttpServer } = require('http');
 const { Server: IoServer } = require('socket.io');
@@ -21,20 +21,9 @@ app.use(errorMiddleware);
 app.set('view engine', 'ejs');
 
 const listaProductos = [];
+const listaMensajes = [];
 
-class Productos{
-    constructor(){}
-
-    getProducts(){
-        return listaProductos
-    }
-
-    postProduct(producto){
-        listaProductos.push(producto)
-    }
-
-}
-const Productos1 = new Productos;
+//const fecha = new Date(Date.now);
 
 app.get('/health', (_req, res, next) => {
     try {
@@ -51,7 +40,8 @@ app.get('/health', (_req, res, next) => {
 app.get('/', (_req, res, next) => {
     try {
         res.status(200).render('index', {
-        productos: Productos1.getProducts()
+        productos: listaProductos,
+        mensajes: listaMensajes
     })}
     catch(err){
         next(err)
@@ -63,11 +53,13 @@ app.get('/', (_req, res, next) => {
 io.on('connection', (socket) => {
     console.info('Nuevo cliente conectado')
     socket.on('NEW_MESSAGE_CLI', message => {
-        io.emit('NEW_MESSAGE_SERVER', message)
+        message.fyh = new Date().toLocaleString();
+        listaMensajes.push(message);
+        io.sockets.emit('NEW_MESSAGE_SERVER', message);
     });
 
     socket.on('NEW_PRODUCT_CLI', producto => {
-        Productos1.postProduct(producto);
+        listaProductos.push(producto);
         console.log(producto);
         io.sockets.emit('NEW_PRODUCT_SERVER', producto);
     });
