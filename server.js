@@ -1,3 +1,7 @@
-const http = require('./app');
+const http = require('./src/app');
 
-http.listen(8080, ()=> {});
+const PORT = process.env.PORT || 8080;
+
+http.listen(PORT, () => {
+  console.log("Server listen on port " + PORT);
+});
